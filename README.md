@@ -1,4 +1,4 @@
-# Agenda de Conatatos
+# Agenda de Contatos
 Projeto do segundo período do curso de Engenharia de Software - IFPB Campus João Pessoa
 
 ## Descrição
@@ -21,7 +21,7 @@ Projeto do segundo período do curso de Engenharia de Software - IFPB Campus Jo�
 1. Clone o repositório:
    - git clone https://github.com/GuilhermeMeloRoxo/Agenda-de-Contatos.git
 2. Execute o projeto:
-   - 
+   - java 
 
 ## Testes
 
