@@ -2,10 +2,14 @@
 Projeto do segundo período do curso de Engenharia de Software - IFPB Campus João Pessoa
 
 ## Descrição
-
+Desenvolver uma agenda de contatos em Java, utilizando as camadas de interface do
+usuário, de serviço e de repositório.
 
 ## Funcionalidades
+- CRUD
 - Navegação Intuitiva
+- Validação de dados
+- Persistência
 
 ## Tecnologias Utilizadas
 - Frontend: Java
@@ -23,9 +27,13 @@ Projeto do segundo período do curso de Engenharia de Software - IFPB Campus Jo�
 2. Execute o projeto:
    - java 
 
-## Testes
-
 ## Estrutura do Projeto
+
+      Agenda-de-Contatos/
+      ├── db4o/
+      ├── src/
+      ├── target/
+      └── pom.xml
 
 ## Autores
 - **Guilherme Mélo** - Desenvolvimento Full Stack - 
