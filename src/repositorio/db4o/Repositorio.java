@@ -49,6 +49,23 @@ public abstract class Repositorio<T> implements CRUDInterface<T> {
 		else
 			return resultados.getFirst();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public T localizarNome(String nome) {
+		// inferindo o tipo da classe T
+		ParameterizedType type = (ParameterizedType) getClass().getGenericSuperclass();
+		Class<T> classe = (Class<T>) type.getActualTypeArguments()[0];
+
+		Query q = manager.query();
+		q.constrain(classe);
+		q.descend("nome").constrain(nome);
+		List<T> resultados = q.execute();
+		if (resultados.isEmpty())
+			return null;
+
+		else
+			return resultados.getFirst();
+	}
 
 	public T atualizar(T objeto) {
 		manager.store(objeto);

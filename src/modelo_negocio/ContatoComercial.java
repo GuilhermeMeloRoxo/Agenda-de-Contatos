@@ -13,6 +13,9 @@ public class ContatoComercial extends Contato {
 		super(nome, telefones, cidade);
 		this.empresa = empresa;
 	}
+	public ContatoComercial(String nome, String empresa2, int idCidade) {
+		// TODO Auto-generated constructor stub
+	}
 	public String getEmpresa() {
 		return empresa;
 	}

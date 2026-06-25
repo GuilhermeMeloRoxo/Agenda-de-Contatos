@@ -13,6 +13,9 @@ public class ContatoPessoal extends Contato {
 		super(nome, telefones, cidade);
 		this.grauProximidade = grauProximidade;
 	}
+	public ContatoPessoal(String nome, int grauDeProximidade, int idCidade) {
+		// TODO Auto-generated constructor stub
+	}
 	public int getGrauProximidade() {
 		return grauProximidade;
 	}
