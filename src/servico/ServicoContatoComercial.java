@@ -19,10 +19,13 @@ public class ServicoContatoComercial extends Servico {
 	public static void criarContatoComercial(String nome, String empresa, int idCidade) throws Exception {
 		try {
 			repContatoComercial.begin();
-
+			
+			nome.toUpperCase();
+			
 			ContatoComercial e = repContatoComercial.localizarNome(nome);
 			if (e != null)
-				throw new Exception("empresa ja existe:" + empresa);
+				throw new Exception("nome de contato já existe:" + nome);
+			
 
 			e = new ContatoComercial(nome, empresa, idCidade);
 

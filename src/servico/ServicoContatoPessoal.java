@@ -20,11 +20,23 @@ public class ServicoContatoPessoal extends Servico {
 	public static void criarContatoPessoal(String nome, int grauDeProximidade, int idCidade) throws Exception {
 		try {
 			repContatoPessoal.begin();
-
+			
+			nome.toUpperCase();
+			
 			ContatoPessoal p = repContatoPessoal.localizarNome(nome);
-			if (p != null)
+			if (p != null) {
 				throw new Exception("usuario ja existe:" + nome);
-
+			}
+			
+			if (grauDeProximidade < 1 || grauDeProximidade > 3) {
+				throw new Exception("grau de proximidade inválido:" + grauDeProximidade);
+			}
+			
+			Cidade c = repCidade.localizarCidade(idCidade);
+			if (c == null) {
+				throw new Exception("id de cidade inválido:" + idCidade);
+			}
+			
 			p = new ContatoPessoal(nome, grauDeProximidade, idCidade);
 
 			repContatoPessoal.criar(p);
@@ -45,10 +57,12 @@ public class ServicoContatoPessoal extends Servico {
 
 			p.setGrauProximidade(grauDeProximidade);
 			
-	        if (idCidade != p.getCidade().getId()) {
-	            Cidade c = repCidade.localizarCidade(idCidade);
-	            p.setCidade(c);
-	        }
+            Cidade c = repCidade.localizarCidade(idCidade);
+            if (c == null) {
+				throw new Exception("id de cidade inválido:" + idCidade);
+			}
+            
+            p.setCidade(c);
 
 
 			repContatoPessoal.atualizar(p);
