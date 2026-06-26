@@ -62,10 +62,16 @@ public class TelaPrincipal {
 		label = new JLabel("");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		ImageIcon imagem = new ImageIcon(getClass().getResource("/imagens/agenda.jpg"));
-		imagem = new ImageIcon(imagem.getImage().getScaledInstance(label.getWidth(),label.getHeight(), Image.SCALE_DEFAULT));
-		label.setIcon(imagem);
-		label.setBounds(-32, 0, 513, 281);
+		java.net.URL urlImagem = getClass().getResource("/imagens/agenda.jpg");
+		if (urlImagem != null) {
+			ImageIcon imagem = new ImageIcon(urlImagem);
+			imagem = new ImageIcon(imagem.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
+			label.setIcon(imagem);
+			label.setBounds(-32, 0, 513, 281);
+		} else {
+			label.setText("Agenda de Contatos");
+			label.setBounds(-40, 0, 512, 200);
+		}
 		frame.getContentPane().add(label);
 
 		JMenuBar menuBar = new JMenuBar();
