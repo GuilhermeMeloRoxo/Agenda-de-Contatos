@@ -1,8 +1,4 @@
-/**********************************
- * IFPB - Bacharelado em Eng. de Software
- * Prof. Fausto Maranhão Ayres
- **********************************/
-package repositorio.db4o;
+ package repositorio.db4o;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -11,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.db4o.ObjectContainer;
+import com.db4o.query.Query;
 
 import repositorio.CRUDInterface;
 

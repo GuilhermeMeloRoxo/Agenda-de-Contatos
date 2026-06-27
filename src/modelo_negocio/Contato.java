@@ -21,9 +21,8 @@ public class Contato {
 	private Cidade cidade;
 
 	public Contato() {}
-	public Contato(String nome, List<String> telefones, Cidade cidade) {
+	public Contato(String nome, Cidade cidade) {
 		this.nome = nome;
-		this.telefones = telefones;
 		this.cidade = cidade;
 	}
 	public int getId() {

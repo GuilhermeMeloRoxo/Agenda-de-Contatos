@@ -38,13 +38,8 @@ public class ServicoContatoPessoal extends Servico {
 			if (grauDeProximidade < 1 || grauDeProximidade > 3) {
 				throw new Exception("grau de proximidade inválido: " + grauDeProximidade);
 			}
-			
 			Cidade c = repCidade.localizar(idCidade);
-			if (c == null) {
-				throw new Exception("id de cidade inválido: " + idCidade);
-			}
-			
-			p = new ContatoPessoal(n, grauDeProximidade, idCidade);
+			p = new ContatoPessoal(n, grauDeProximidade, c);
 
 			repContatoPessoal.criar(p);
 			repContatoPessoal.commit();

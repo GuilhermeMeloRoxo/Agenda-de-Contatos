@@ -9,12 +9,9 @@ public class ContatoPessoal extends Contato {
 	private int grauProximidade;
 
 	public ContatoPessoal(){}
-	public ContatoPessoal(String nome, List<String> telefones, Cidade cidade, int grauProximidade){
-		super(nome, telefones, cidade);
+	public ContatoPessoal(String nome, int grauProximidade, Cidade cidade){
+		super(nome, cidade);
 		this.grauProximidade = grauProximidade;
-	}
-	public ContatoPessoal(String nome, int grauDeProximidade, int idCidade) {
-		// TODO Auto-generated constructor stub
 	}
 	public int getGrauProximidade() {
 		return grauProximidade;

@@ -34,7 +34,6 @@ public class ServicoContato extends Servico {
 				throw new Exception("contato não exite: " + id);
 			} c.setCidade(null);
 			repContato.deletar(c);
-			repContato.atualizar(c);
 			repContato.commit();
 		} catch (Exception e) {
 			repContatoComercial.rollback();

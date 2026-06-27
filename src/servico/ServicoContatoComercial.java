@@ -36,9 +36,9 @@ public class ServicoContatoComercial extends Servico {
 			ContatoComercial e = repContatoComercial.localizarNome(n);
 			if (e != null)
 				throw new Exception("nome de contato já existe: " + n);
-			
+			Cidade c = repCidade.localizar(idCidade);
 
-			e = new ContatoComercial(n, emp, idCidade);
+			e = new ContatoComercial(n, emp, c);
 
 			repContatoComercial.criar(e);
 			repContatoComercial.commit();

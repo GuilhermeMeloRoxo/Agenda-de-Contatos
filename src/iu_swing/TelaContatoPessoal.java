@@ -139,6 +139,8 @@ public class TelaContatoPessoal {
 						textField_id.setText(id + "");
 						textField_nome.setText(c.getNome());
 						textField_telefone.setText("");
+						textField_cidade.setText(c.getCidade().getNome());
+						textField_grauProximidade.setText(c.getGrauProximidade() + "");
 					}
 				} catch (Exception erro) {
 					label_mensagem.setText(erro.getMessage());
@@ -270,7 +272,7 @@ public class TelaContatoPessoal {
 			model.setRowCount(0);
 			List<ContatoPessoal> lista = ServicoContatoPessoal.listarContatosPessoais();
 			for (ContatoPessoal p : lista)
-				model.addRow(new Object[] { p.getId(), p.getNome(), p.getCidade(), p.getGrauProximidade() });
+				model.addRow(new Object[] { p.getId(), p.getNome(), p.getCidade().getNome(), p.getGrauProximidade() });
 
 			label_resultado.setText("Resultados: " + lista.size() + " contatos - selecione uma linha para editar");
 		} catch (Exception erro) {
@@ -313,8 +315,8 @@ public class TelaContatoPessoal {
 			if (ServicoCidade.localizarCidade(cidade) == null) {
 				ServicoCidade.criarCidade(cidade);
 			} Cidade c = ServicoCidade.localizarCidade(cidade);
-			int idC = c.getId();
-			ServicoContatoPessoal.criarContatoPessoal(nome, grau, idC);
+			int idCidade = c.getId();
+			ServicoContatoPessoal.criarContatoPessoal(nome, grau, idCidade);
 
 			label_mensagem.setText("Contato criada");
 			listagem();

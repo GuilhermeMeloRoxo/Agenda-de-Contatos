@@ -139,6 +139,8 @@ public class TelaContatoComercial {
 						textField_id.setText(id + "");
 						textField_nome.setText(p.getNome());
 						textField_telefone.setText("");
+						textField_empresa.setText(p.getEmpresa());
+						textField_cidade.setText(p.getCidade().getNome());
 					}
 				} catch (Exception erro) {
 					label_mensagem.setText(erro.getMessage());
@@ -270,7 +272,7 @@ public class TelaContatoComercial {
 			model.setRowCount(0);
 			List<ContatoComercial> lista = ServicoContatoComercial.listarContatosEmpresa();
 			for (ContatoComercial p : lista)
-				model.addRow(new Object[] { p.getId(), p.getNome(), p.getCidade() });
+				model.addRow(new Object[] { p.getId(), p.getNome(), p.getEmpresa(), p.getCidade().getNome() });
 
 			label_resultado.setText("Resultados: " + lista.size() + " contatos - selecione uma linha para editar");
 		} catch (Exception erro) {
@@ -312,9 +314,10 @@ public class TelaContatoComercial {
 			String cidade = textField_cidade.getText().trim();
 			if (ServicoCidade.localizarCidade(cidade) == null) {
 				ServicoCidade.criarCidade(cidade);
-			} Cidade c = ServicoCidade.localizarCidade(cidade);
-			int idC = c.getId();
-			ServicoContatoComercial.criarContatoComercial(nome, empresa, idC);
+			}
+			Cidade c = ServicoCidade.localizarCidade(cidade);
+			int idCidade = c.getId();
+			ServicoContatoComercial.criarContatoComercial(nome, empresa, idCidade);
 
 			label_mensagem.setText("Contato criada");
 			listagem();

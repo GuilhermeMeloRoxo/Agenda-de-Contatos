@@ -84,10 +84,10 @@ public class TelaPrincipal {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		java.net.URL urlImagem = getClass().getResource("/imagens/agenda.jpg");
 		if (urlImagem != null) {
+			label.setBounds(-32, 0, 513, 281);
 			ImageIcon imagem = new ImageIcon(urlImagem);
 			imagem = new ImageIcon(imagem.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
 			label.setIcon(imagem);
-			label.setBounds(-32, 0, 513, 281);
 		} else {
 			label.setText("Agenda de Contatos");
 			label.setBounds(-40, 0, 512, 200);
