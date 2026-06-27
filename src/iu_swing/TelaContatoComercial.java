@@ -118,7 +118,7 @@ public class TelaContatoComercial {
 		scrollPane.setBounds(21, 39, 751, 147);
 		frame.getContentPane().add(scrollPane);
 		table = new JTable();
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Nome", "Empresa", "Cidade" }) {
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Nome", "Empresa", "Cidade", "Telefones Cadastrados" }) {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
@@ -295,7 +295,7 @@ public class TelaContatoComercial {
 			model.setRowCount(0);
 			List<ContatoComercial> lista = ServicoContatoComercial.listarContatosEmpresa();
 			for (ContatoComercial p : lista)
-				model.addRow(new Object[] { p.getId(), p.getNome(), p.getEmpresa(), p.getCidade().getNome() });
+				model.addRow(new Object[] { p.getId(), p.getNome(), p.getEmpresa(), p.getCidade().getNome(), p.getTelefones().size()});
 
 			label_resultado.setText("Resultados: " + lista.size() + " contatos - selecione uma linha para editar");
 		} catch (Exception erro) {
@@ -381,7 +381,7 @@ public class TelaContatoComercial {
 			}
 
 			int id = Integer.parseInt(textField_id.getText());
-			ContatoPessoal p = ServicoContatoPessoal.localizarContatoPessoal(id);
+			ContatoComercial p = ServicoContatoComercial.localizarContatoComercial(id);
 			String telefones;
 			if (p.getTelefones().size() == 0)
 				telefones = "Sem telefones";

@@ -115,7 +115,7 @@ public class TelaContatoPessoal {
 		scrollPane.setBounds(21, 39, 751, 147);
 		frame.getContentPane().add(scrollPane);
 		table = new JTable();
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Nome", "Cidade", "Grau de Proximidade" }) {
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Nome", "Cidade", "Grau de Proximidade", "Telefones Cadastrados" }) {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
@@ -292,7 +292,7 @@ public class TelaContatoPessoal {
 			model.setRowCount(0);
 			List<ContatoPessoal> lista = ServicoContatoPessoal.listarContatosPessoais();
 			for (ContatoPessoal p : lista)
-				model.addRow(new Object[] { p.getId(), p.getNome(), p.getCidade().getNome(), p.getGrauProximidade() });
+				model.addRow(new Object[] { p.getId(), p.getNome(), p.getCidade().getNome(), p.getGrauProximidade(), p.getTelefones().size() });
 
 			label_resultado.setText("Resultados: " + lista.size() + " contatos - selecione uma linha para editar");
 		} catch (Exception erro) {
