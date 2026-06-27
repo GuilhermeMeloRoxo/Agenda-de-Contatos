@@ -53,6 +53,8 @@ public class TelaContatoPessoal {
 	private JButton button_atualizar;
 	private JButton button_apagar;
 	private JButton button_limpar;
+	private JButton button_listarTelefones;
+	private JButton button_criarTelefones;
 	/**
 	 * Launch the application.
 	 */
@@ -163,23 +165,41 @@ public class TelaContatoPessoal {
 		label_nome.setBounds(180, 215, 50, 14);
 		frame.getContentPane().add(label_nome);
 
-		label_cidade = new JLabel("Criar Cidade:");
+		label_cidade = new JLabel("Cidade:");
 		label_cidade.setHorizontalAlignment(SwingConstants.LEFT);
 		label_cidade.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		label_cidade.setBounds(180, 269, 72, 14);
+		label_cidade.setBounds(180, 239, 50, 14);
 		frame.getContentPane().add(label_cidade);
 
 		label_grauProximidade = new JLabel("Grau de Proximidade:");
 		label_grauProximidade.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		label_grauProximidade.setHorizontalAlignment(SwingConstants.LEFT);
-		label_grauProximidade.setBounds(180, 241, 123, 14);
+		label_grauProximidade.setBounds(180, 263, 123, 14);
 		frame.getContentPane().add(label_grauProximidade);
 		
-		label_telefone = new JLabel("N\u00FAmero:");
+		label_telefone = new JLabel("Adicionar Telefone:");
 		label_telefone.setHorizontalAlignment(SwingConstants.LEFT);
 		label_telefone.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		label_telefone.setBounds(324, 241, 50, 14);
+		label_telefone.setBounds(239, 297, 102, 14);
 		frame.getContentPane().add(label_telefone);
+		
+		button_listarTelefones = new JButton("Listar Telefones");
+		button_listarTelefones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botaoListarTelefones();
+			}
+		});
+		button_listarTelefones.setBounds(115, 293, 115, 23);
+		frame.getContentPane().add(button_listarTelefones);
+		
+		button_criarTelefones = new JButton("Criar Telefone");
+		button_criarTelefones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botaoCriarTelefone();
+			}
+		});
+		button_criarTelefones.setBounds(479, 293, 115, 23);
+		frame.getContentPane().add(button_criarTelefones);
 
 		button_criar = new JButton("Criar");
 		button_criar.setToolTipText("Cadastrar novo contato");
@@ -233,7 +253,7 @@ public class TelaContatoPessoal {
 		textField_grauProximidade = new JTextField();
 		textField_grauProximidade.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textField_grauProximidade.setColumns(10);
-		textField_grauProximidade.setBounds(290, 237, 28, 20);
+		textField_grauProximidade.setBounds(289, 259, 28, 20);
 		frame.getContentPane().add(textField_grauProximidade);
 
 		label_id = new JLabel("ID:");
@@ -251,7 +271,7 @@ public class TelaContatoPessoal {
 		textField_telefone = new JTextField();
 		textField_telefone.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textField_telefone.setColumns(10);
-		textField_telefone.setBounds(370, 237, 98, 20);
+		textField_telefone.setBounds(339, 293, 129, 20);
 		frame.getContentPane().add(textField_telefone);
 
 		try {
@@ -259,7 +279,7 @@ public class TelaContatoPessoal {
 			textField_cidade = new JTextField();
 			textField_cidade.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			textField_cidade.setColumns(10);
-			textField_cidade.setBounds(246, 265, 222, 20);
+			textField_cidade.setBounds(221, 235, 247, 20);
 			frame.getContentPane().add(textField_cidade);
 
 		} catch (Exception e1) {
@@ -347,6 +367,50 @@ public class TelaContatoPessoal {
 			listagem();
 		} catch (Exception ex2) {
 			label_mensagem.setText(ex2.getMessage());
+		}
+	}
+	public void botaoListarTelefones() {
+		try {
+			if (textField_id.getText().isEmpty()) {
+				label_mensagem.setText("Selecione uma pessoa");
+				return;
+			}
+
+			int id = Integer.parseInt(textField_id.getText());
+			ContatoPessoal p = ServicoContatoPessoal.localizarContatoPessoal(id);
+			String telefones;
+			if (p.getTelefones().size() == 0)
+				telefones = "Sem telefones";
+			else {
+				telefones = "";
+				for (String t : p.getTelefones())
+					telefones = telefones + "\n" + t;
+			}
+			JOptionPane.showMessageDialog(frame, telefones, "Telefones", JOptionPane.INFORMATION_MESSAGE);
+
+		} catch (Exception erro) {
+			label_mensagem.setText(erro.getMessage());
+		}
+
+	}
+	public void botaoCriarTelefone() {
+		try {
+			if (textField_id.getText().isEmpty()) {
+				label_mensagem.setText("Selecione uma pessoa");
+				return;
+			}
+
+			if (textField_telefone.getText().isEmpty()) {
+				label_mensagem.setText("Campo de criar telefone vazio");
+				return;
+			}
+
+			int id = Integer.parseInt(textField_id.getText());
+			String numero = textField_telefone.getText();
+			ServicoContato.adicionarTelefoneContato(numero, id);
+			label_mensagem.setText("telefone criado: " + numero);
+		} catch (Exception ex) {
+			label_mensagem.setText(ex.getMessage());
 		}
 	}
 }

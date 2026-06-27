@@ -28,10 +28,12 @@ import javax.swing.table.DefaultTableModel;
 
 import modelo_negocio.Cidade;
 import modelo_negocio.ContatoComercial;
+import modelo_negocio.ContatoPessoal;
 import servico.Servico;
 import servico.ServicoCidade;
 import servico.ServicoContato;
 import servico.ServicoContatoComercial;
+import servico.ServicoContatoPessoal;
 
 public class TelaContatoComercial {
 	private JDialog frame;
@@ -53,6 +55,8 @@ public class TelaContatoComercial {
 	private JButton button_atualizar;
 	private JButton button_apagar;
 	private JButton button_limpar;
+	private JButton button_listarTelefones;
+	private JButton button_criarTelefones;
 
 	/**
 	 * Launch the application.
@@ -175,12 +179,31 @@ public class TelaContatoComercial {
 		label_empresa.setBounds(180, 241, 50, 14);
 		frame.getContentPane().add(label_empresa);
 		
-		label_telefone = new JLabel("N\u00FAmero:");
+		label_telefone = new JLabel("Adicionar Telefone:");
 		label_telefone.setHorizontalAlignment(SwingConstants.LEFT);
 		label_telefone.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		label_telefone.setBounds(180, 293, 50, 14);
+		label_telefone.setBounds(239, 297, 102, 14);
 		frame.getContentPane().add(label_telefone);
+		
+		button_listarTelefones = new JButton("Listar Telefones");
+		button_listarTelefones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botaoListarTelefones();
+			}
+		});
+		button_listarTelefones.setBounds(115, 293, 115, 23);
+		frame.getContentPane().add(button_listarTelefones);
+		
+		button_criarTelefones = new JButton("Criar Telefone");
+		button_criarTelefones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botaoCriarTelefone();
+			}
+		});
+		button_criarTelefones.setBounds(479, 293, 115, 23);
+		frame.getContentPane().add(button_criarTelefones);
 
+		
 		button_criar = new JButton("Criar");
 		button_criar.setToolTipText("Cadastrar novo contato");
 		button_criar.addActionListener(new ActionListener() {
@@ -251,7 +274,7 @@ public class TelaContatoComercial {
 		textField_telefone = new JTextField();
 		textField_telefone.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textField_telefone.setColumns(10);
-		textField_telefone.setBounds(230, 293, 115, 20);
+		textField_telefone.setBounds(339, 293, 129, 20);
 		frame.getContentPane().add(textField_telefone);
 
 		try {
@@ -348,6 +371,50 @@ public class TelaContatoComercial {
 			listagem();
 		} catch (Exception ex2) {
 			label_mensagem.setText(ex2.getMessage());
+		}
+	}
+	public void botaoListarTelefones() {
+		try {
+			if (textField_id.getText().isEmpty()) {
+				label_mensagem.setText("Selecione uma pessoa");
+				return;
+			}
+
+			int id = Integer.parseInt(textField_id.getText());
+			ContatoPessoal p = ServicoContatoPessoal.localizarContatoPessoal(id);
+			String telefones;
+			if (p.getTelefones().size() == 0)
+				telefones = "Sem telefones";
+			else {
+				telefones = "";
+				for (String t : p.getTelefones())
+					telefones = telefones + "\n" + t;
+			}
+			JOptionPane.showMessageDialog(frame, telefones, "Telefones", JOptionPane.INFORMATION_MESSAGE);
+
+		} catch (Exception erro) {
+			label_mensagem.setText(erro.getMessage());
+		}
+
+	}
+	public void botaoCriarTelefone() {
+		try {
+			if (textField_id.getText().isEmpty()) {
+				label_mensagem.setText("Selecione uma pessoa");
+				return;
+			}
+
+			if (textField_telefone.getText().isEmpty()) {
+				label_mensagem.setText("Campo de criar telefone vazio");
+				return;
+			}
+
+			int id = Integer.parseInt(textField_id.getText());
+			String numero = textField_telefone.getText();
+			ServicoContato.adicionarTelefoneContato(numero, id);
+			label_mensagem.setText("telefone criado: " + numero);
+		} catch (Exception ex) {
+			label_mensagem.setText(ex.getMessage());
 		}
 	}
 }

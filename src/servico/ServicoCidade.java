@@ -1,6 +1,5 @@
 package servico;
 
-import java.text.Normalizer;
 import java.util.regex.Pattern;
 
 import modelo_negocio.Cidade;
