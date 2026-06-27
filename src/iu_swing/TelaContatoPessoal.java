@@ -155,7 +155,7 @@ public class TelaContatoPessoal {
 		label_mensagem.setBounds(21, 326, 751, 14);
 		frame.getContentPane().add(label_mensagem);
 
-		label_resultado = new JLabel("Selecione uma linha para editar");
+		label_resultado = new JLabel("Selecione uma linha para editar o contato pessoal");
 		label_resultado.setBounds(21, 187, 394, 14);
 		frame.getContentPane().add(label_resultado);
 
@@ -189,7 +189,7 @@ public class TelaContatoPessoal {
 				botaoListarTelefones();
 			}
 		});
-		button_listarTelefones.setBounds(115, 293, 115, 23);
+		button_listarTelefones.setBounds(101, 293, 129, 23);
 		frame.getContentPane().add(button_listarTelefones);
 		
 		button_criarTelefones = new JButton("Criar Telefone");
@@ -296,7 +296,7 @@ public class TelaContatoPessoal {
 			for (ContatoPessoal p : lista)
 				model.addRow(new Object[] { p.getId(), p.getNome(), p.getCidade().getNome(), p.getGrauProximidade(), p.getTelefones().size() });
 
-			label_resultado.setText("Resultados: " + lista.size() + " contatos - selecione uma linha para editar");
+			label_resultado.setText("Resultados: " + lista.size() + " contatos pessoais - selecione uma linha para editar");
 		} catch (Exception erro) {
 			label_mensagem.setText(erro.getMessage());
 		}
@@ -340,7 +340,7 @@ public class TelaContatoPessoal {
 			int idCidade = c.getId();
 			ServicoContatoPessoal.criarContatoPessoal(nome, grau, idCidade);
 
-			label_mensagem.setText("Contato criada");
+			label_mensagem.setText("Contato pessoal criado");
 			listagem();
 
 		} catch (Exception ex) {
@@ -365,7 +365,7 @@ public class TelaContatoPessoal {
 			int idC = c.getId();
 			ServicoContatoPessoal.alterarContatoPessoal(id, nome, grau, idC);
 
-			label_mensagem.setText("Pessoa atualizada id: " + id);
+			label_mensagem.setText("Contato pessoal atualizado id: " + id);
 			listagem();
 		} catch (Exception ex2) {
 			label_mensagem.setText(ex2.getMessage());
@@ -374,7 +374,7 @@ public class TelaContatoPessoal {
 	public void botaoListarTelefones() {
 		try {
 			if (textField_id.getText().isEmpty()) {
-				label_mensagem.setText("Selecione uma pessoa");
+				label_mensagem.setText("Selecione um contato pessoal");
 				return;
 			}
 
@@ -382,9 +382,9 @@ public class TelaContatoPessoal {
 			ContatoPessoal p = ServicoContatoPessoal.localizarContatoPessoal(id);
 			String telefones;
 			if (p.getTelefones().size() == 0)
-				telefones = "Sem telefones";
+				telefones = p.getNome() + "\nSem telefones";
 			else {
-				telefones = "";
+				telefones = p.getNome();
 				for (String t : p.getTelefones())
 					telefones = telefones + "\n" + t;
 			}
@@ -398,7 +398,7 @@ public class TelaContatoPessoal {
 	public void botaoCriarTelefone() {
 		try {
 			if (textField_id.getText().isEmpty()) {
-				label_mensagem.setText("Selecione uma pessoa");
+				label_mensagem.setText("Selecione um contato pessoal");
 				return;
 			}
 
@@ -410,7 +410,8 @@ public class TelaContatoPessoal {
 			int id = Integer.parseInt(textField_id.getText());
 			String numero = textField_telefone.getText();
 			ServicoContato.adicionarTelefoneContato(numero, id);
-			label_mensagem.setText("telefone criado: " + numero);
+			label_mensagem.setText("Telefone criado: " + numero);
+			textField_telefone.setText("");
 		} catch (Exception ex) {
 			label_mensagem.setText(ex.getMessage());
 		}
