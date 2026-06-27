@@ -1,8 +1,6 @@
 package repositorio.db4o;
 
 import java.util.List;
-import java.util.regex.Pattern;
-
 import com.db4o.query.Query;
 import modelo_negocio.Cidade;
 
