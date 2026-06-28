@@ -140,7 +140,6 @@ public class TelaContatoComercial {
 						ContatoComercial p = ServicoContatoComercial.localizarContatoComercial(id);
 						textField_id.setText(id + "");
 						textField_nome.setText(p.getNome());
-						textField_telefone.setText("");
 						textField_empresa.setText(p.getEmpresa());
 						textField_cidade.setText(p.getCidade().getNome());
 					}
@@ -198,7 +197,7 @@ public class TelaContatoComercial {
 				botaoCriarTelefone();
 			}
 		});
-		button_criarTelefones.setBounds(479, 293, 115, 23);
+		button_criarTelefones.setBounds(479, 293, 129, 23);
 		frame.getContentPane().add(button_criarTelefones);
 
 		

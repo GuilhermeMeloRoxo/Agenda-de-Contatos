@@ -140,7 +140,6 @@ public class TelaContatoPessoal {
 						ContatoPessoal c = ServicoContatoPessoal.localizarContatoPessoal(id);
 						textField_id.setText(id + "");
 						textField_nome.setText(c.getNome());
-						textField_telefone.setText("");
 						textField_cidade.setText(c.getCidade().getNome());
 						textField_grauProximidade.setText(c.getGrauProximidade() + "");
 					}
@@ -198,7 +197,7 @@ public class TelaContatoPessoal {
 				botaoCriarTelefone();
 			}
 		});
-		button_criarTelefones.setBounds(479, 293, 115, 23);
+		button_criarTelefones.setBounds(479, 293, 129, 23);
 		frame.getContentPane().add(button_criarTelefones);
 
 		button_criar = new JButton("Criar");
