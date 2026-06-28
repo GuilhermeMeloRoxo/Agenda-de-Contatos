@@ -35,15 +35,19 @@ public class ServicoCidade extends Servico {
 			if (nome != null && nome.matches(".*\\d.*")) {
 	            throw new Exception("cidade inválida: não deve conter números");
 	        }
-			if (nome.equals("")) {
+			String nom = Normalizer.normalize(nome, Normalizer.Form.NFD);
+			Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+	        String name = pattern.matcher(nom).replaceAll("");
+			String n = name.toUpperCase().trim();
+			if (n.equals("")) {
 				throw new Exception("cidade inválida");
 			}
 			repCidade.begin();
-			Cidade c = ServicoCidade.localizarCidade(nome);
+			Cidade c = ServicoCidade.localizarCidade(n);
 			if (c != null) {
-				throw new Exception("cidade já existe: " + nome);
+				throw new Exception("cidade já existe: " + n);
 			}
-			c = new Cidade(nome);
+			c = new Cidade(n);
 			repCidade.criar(c);
 			repCidade.commit();
 			

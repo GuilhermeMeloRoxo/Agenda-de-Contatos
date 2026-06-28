@@ -240,7 +240,6 @@ public class TelaContatoPessoal {
 				textField_grauProximidade.setText("");
 				textField_telefone.setText("");
 				textField_cidade.setText("");
-				textField_id.setText("");
 			}
 		});
 		button_limpar.setBounds(633, 237, 89, 23);
@@ -321,6 +320,11 @@ public class TelaContatoPessoal {
 				ServicoContato.apagarContato(id);
 				label_mensagem.setText("Contato excluído id: " + id);
 				listagem();
+				textField_id.setText("");
+				textField_nome.setText("");
+				textField_grauProximidade.setText("");
+				textField_telefone.setText("");
+				textField_cidade.setText("");
 			} else
 				label_mensagem.setText("Exclusão cancelada id: " + id);
 

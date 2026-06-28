@@ -241,7 +241,6 @@ public class TelaContatoComercial {
 				textField_empresa.setText("");
 				textField_telefone.setText("");
 				textField_cidade.setText("");
-				textField_id.setText("");
 			}
 		});
 		button_limpar.setBounds(633, 237, 89, 23);
@@ -322,6 +321,11 @@ public class TelaContatoComercial {
 				ServicoContato.apagarContato(id);
 				label_mensagem.setText("Contato excluído id: " + id);
 				listagem();
+				textField_id.setText("");
+				textField_nome.setText("");
+				textField_empresa.setText("");
+				textField_telefone.setText("");
+				textField_cidade.setText("");
 			} else
 				label_mensagem.setText("Exclusão cancelada id: " + id);
 
