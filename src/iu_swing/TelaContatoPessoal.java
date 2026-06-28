@@ -338,7 +338,7 @@ public class TelaContatoPessoal {
 			label_mensagem.setText("");
 			String nome = textField_nome.getText().trim();
 			int grau = Integer.parseInt(textField_grauProximidade.getText().trim());
-			String cidade = textField_cidade.getText();
+			String cidade = textField_cidade.getText().trim();
 			String nom = Normalizer.normalize(cidade, Normalizer.Form.NFD);
 			Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
 	        String name = pattern.matcher(nom).replaceAll("");
@@ -353,6 +353,7 @@ public class TelaContatoPessoal {
 
 			label_mensagem.setText("Contato pessoal criado");
 			listagem();
+			textField_id.setText("");
 
 		} catch (Exception ex) {
 			label_mensagem.setText(ex.getMessage());
@@ -369,7 +370,7 @@ public class TelaContatoPessoal {
 			int id = Integer.parseInt(textField_id.getText().trim());
 			String nome = textField_nome.getText().trim();
 			int grau = Integer.parseInt(textField_grauProximidade.getText().trim());
-			String cidade = textField_cidade.getText();
+			String cidade = textField_cidade.getText().trim();
 			String nom = Normalizer.normalize(cidade, Normalizer.Form.NFD);
 			Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
 	        String name = pattern.matcher(nom).replaceAll("");
@@ -425,7 +426,7 @@ public class TelaContatoPessoal {
 			}
 
 			int id = Integer.parseInt(textField_id.getText());
-			String numero = textField_telefone.getText();
+			String numero = textField_telefone.getText().trim();
 			ServicoContato.adicionarTelefoneContato(numero, id);
 			label_mensagem.setText("Telefone criado: " + numero);
 			textField_telefone.setText("");
