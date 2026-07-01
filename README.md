@@ -60,7 +60,6 @@ usuário, de serviço e de repositório.
       |   |   ├── ServicoContatoComercial.java
       |   |   └── ServicoContatoPessoal.java
       |   └── log4j2.properties                         # Configuração de Logs
-      ├── target/                                       # Arquivos compilados
       └── pom.xml                                       # Configurações e dependências
 
 ## Autores
